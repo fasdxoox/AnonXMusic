@@ -2,14 +2,18 @@ import time
 
 import psutil
 
-from AnonXMusic.misc import _boot_
-from AnonXMusic.utils.formatters import get_readable_time
+from AnonX.misc import _boot_
+
+from .formatters import get_readable_time
 
 
 async def bot_sys_stats():
     bot_uptime = int(time.time() - _boot_)
-    UP = f"{get_readable_time(bot_uptime)}"
-    CPU = f"{psutil.cpu_percent(interval=0.5)}%"
-    RAM = f"{psutil.virtual_memory().percent}%"
-    DISK = f"{psutil.disk_usage('/').percent}%"
+    cpu = psutil.cpu_percent(interval=0.5)
+    mem = psutil.virtual_memory().percent
+    disk = psutil.disk_usage("/").percent
+    UP = f"{get_readable_time((bot_uptime))}"
+    CPU = f"{cpu}%"
+    RAM = f"{mem}%"
+    DISK = f"{disk}%"
     return UP, CPU, RAM, DISK
